@@ -35,9 +35,9 @@ parallel_compile=1
 
 ##Software version
 #nghttp2
-nghttp2_filename="nghttp2-1.31.0"
+nghttp2_filename="nghttp2-1.31.1"
 #openssl
-openssl_filename="openssl-1.0.2n"
+openssl_filename="openssl-1.0.2o"
 #apache2.4
 apache2_4_filename="httpd-2.4.33"
 #mysql5.5
@@ -46,10 +46,12 @@ mysql5_5_filename="mysql-5.5.60"
 mysql5_6_filename="mysql-5.6.40"
 #mysql5.7
 mysql5_7_filename="mysql-5.7.22"
+#mysql8.0
+mysql8_0_filename="mysql-8.0.11"
 #mariadb5.5
 mariadb5_5_filename="mariadb-5.5.60"
 #mariadb10.0
-mariadb10_0_filename="mariadb-10.0.34"
+mariadb10_0_filename="mariadb-10.0.35"
 #mariadb10.1
 mariadb10_1_filename="mariadb-10.1.32"
 #mariadb10.2
@@ -61,13 +63,13 @@ percona5_6_filename="Percona-Server-5.6.39-83.1"
 #percona5.7
 percona5_7_filename="Percona-Server-5.7.21-21"
 #php5.6
-php5_6_filename="php-5.6.35"
+php5_6_filename="php-5.6.36"
 #php7.0
-php7_0_filename="php-7.0.29"
+php7_0_filename="php-7.0.30"
 #php7.1
-php7_1_filename="php-7.1.16"
+php7_1_filename="php-7.1.17"
 #php7.2
-php7_2_filename="php-7.2.4"
+php7_2_filename="php-7.2.5"
 #phpMyAdmin
 phpmyadmin_filename="phpMyAdmin-4.8.0.1-all-languages"
 
@@ -90,7 +92,7 @@ libmcrypt_filename="libmcrypt-2.5.8"
 #mcrypt
 mcrypt_filename="mcrypt-2.6.8"
 #pcre
-pcre_filename="pcre-8.41"
+pcre_filename="pcre-8.42"
 #re2c
 re2c_filename='re2c-1.0.2'
 #imap
@@ -98,8 +100,8 @@ imap_filename='imap-2007f'
 #libiconv
 libiconv_filename="libiconv-1.15"
 #swoole
-swoole_filename="swoole-src-2.1.1"
-set_hint ${swoole_filename} "php-swoole-2.1.1"
+swoole_filename="swoole-src-2.1.3"
+set_hint ${swoole_filename} "php-swoole-2.1.3"
 #xcache
 xcache_filename="xcache-3.2.0"
 #xdebug
@@ -121,7 +123,7 @@ ionCube64_filename="ioncube_loaders_lin_x86-64"
 #libevent
 libevent_filename="libevent-2.0.22-stable"
 #memcached
-memcached_filename="memcached-1.5.6"
+memcached_filename="memcached-1.5.7"
 #libmemcached
 libmemcached_filename="libmemcached-1.0.18"
 #php-memcached
@@ -130,14 +132,14 @@ php_memcached_filename2="memcached-3.0.4"
 set_hint ${php_memcached_filename} "php-${php_memcached_filename}"
 set_hint ${php_memcached_filename2} "php-${php_memcached_filename2}"
 #redis
-redis_filename="redis-3.2.11"
+redis_filename="redis-4.0.9"
 #php-redis
 php_redis_filename="redis-2.2.8"
-php_redis_filename2="redis-3.1.6"
+php_redis_filename2="redis-4.0.2"
 set_hint ${php_redis_filename} "php-${php_redis_filename}"
 set_hint ${php_redis_filename2} "php-${php_redis_filename2}"
 #php-mongodb
-php_mongo_filename="mongodb-1.4.2"
+php_mongo_filename="mongodb-1.4.3"
 set_hint ${php_mongo_filename} "php-${php_mongo_filename}"
 #php-libsodium
 libsodium_filename="libsodium-1.0.16"
@@ -161,6 +163,7 @@ mysql_arr=(
 ${mysql5_5_filename}
 ${mysql5_6_filename}
 ${mysql5_7_filename}
+${mysql8_0_filename}
 ${mariadb5_5_filename}
 ${mariadb10_0_filename}
 ${mariadb10_1_filename}
