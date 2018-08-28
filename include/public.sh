@@ -305,8 +305,8 @@ check_ram(){
 
 #Check system
 check_sys(){
-    local checkType=${1}
-    local value=${2}
+    local checkType=$1
+    local value=$2
 
     local release=''
     local systemPackage=''
@@ -314,41 +314,40 @@ check_sys(){
     if [[ -f /etc/redhat-release ]]; then
         release="centos"
         systemPackage="yum"
-    elif cat /etc/issue | grep -Eqi "debian"; then
+    elif grep -Eqi "debian" /etc/issue; then
         release="debian"
         systemPackage="apt"
-    elif cat /etc/issue | grep -Eqi "ubuntu"; then
+    elif grep -Eqi "ubuntu" /etc/issue; then
         release="ubuntu"
         systemPackage="apt"
-    elif cat /etc/issue | grep -Eqi "centos|red hat|redhat"; then
+    elif grep -Eqi "centos|red hat|redhat" /etc/issue; then
         release="centos"
         systemPackage="yum"
-    elif cat /proc/version | grep -Eqi "debian"; then
+    elif grep -Eqi "debian" /proc/version; then
         release="debian"
         systemPackage="apt"
-    elif cat /proc/version | grep -Eqi "ubuntu"; then
+    elif grep -Eqi "ubuntu" /proc/version; then
         release="ubuntu"
         systemPackage="apt"
-    elif cat /proc/version | grep -Eqi "centos|red hat|redhat"; then
+    elif grep -Eqi "centos|red hat|redhat" /proc/version; then
         release="centos"
         systemPackage="yum"
     fi
 
-    if [[ ${checkType} == "sysRelease" ]]; then
-        if [ "$value" == "$release" ]; then
+    if [[ "${checkType}" == "sysRelease" ]]; then
+        if [ "${value}" == "${release}" ]; then
             return 0
         else
             return 1
         fi
-    elif [[ ${checkType} == "packageManager" ]]; then
-        if [ "$value" == "$systemPackage" ]; then
+    elif [[ "${checkType}" == "packageManager" ]]; then
+        if [ "${value}" == "${systemPackage}" ]; then
             return 0
         else
             return 1
         fi
     fi
 }
-
 
 create_lib_link(){
     local lib=${1}
@@ -797,6 +796,9 @@ last_confirm(){
     echo "phpMyAdmin: ${phpmyadmin}"
     [ "${phpmyadmin}" != "do_not_install" ] && echo "phpMyAdmin Location: ${web_root_dir}/phpmyadmin"
     echo
+    echo "KodExplorer: ${kodexplorer}"
+    [ "${kodexplorer}" != "do_not_install" ] && echo "KodExplorer Location: ${web_root_dir}/kod"
+    echo
     echo "---------------------------------------------------------------------"
     echo
 
@@ -870,6 +872,9 @@ finally(){
     echo "phpMyAdmin: ${phpmyadmin}"
     [ "${phpmyadmin}" != "do_not_install" ] && echo "phpMyAdmin Location: ${web_root_dir}/phpmyadmin"
     echo
+    echo "KodExplorer: ${kodexplorer}"
+    [ "${kodexplorer}" != "do_not_install" ] && echo "KodExplorer Location: ${web_root_dir}/kod"
+    echo
     echo "---------------------------------------------------------------------"
     echo
 
@@ -888,6 +893,15 @@ finally(){
         cat >> ${apache_location}/conf/httpd.conf <<EOF
 <IfModule alias_module>
     Alias /phpmyadmin ${web_root_dir}/phpmyadmin
+</IfModule>
+EOF
+    fi
+
+    # Add kodexplorer Alias
+    if [ -d "${web_root_dir}/kod" ]; then
+        cat >> ${apache_location}/conf/httpd.conf <<EOF
+<IfModule alias_module>
+    Alias /kod ${web_root_dir}/kod
 </IfModule>
 EOF
     fi
@@ -933,9 +947,16 @@ install_tool(){
     log "Info" "Starting to install development tools..."
     if check_sys packageManager apt; then
         apt-get -y update > /dev/null 2>&1
-        apt-get -y install gcc g++ make wget perl curl bzip2 libreadline-dev net-tools python python-dev cron ca-certificates > /dev/null 2>&1
+        apt_tools=(gcc g++ make wget perl curl bzip2 libreadline-dev net-tools python python-dev cron ca-certificates)
+        for tool in ${apt_tools[@]}; do
+            error_detect_depends "apt-get -y install ${tool}"
+        done
     elif check_sys packageManager yum; then
-        yum install -y yum-utils epel-release gcc gcc-c++ make wget perl curl bzip2 readline readline-devel net-tools python python-devel crontabs ca-certificates > /dev/null 2>&1
+        yum makecache
+        yum_tools=(yum-utils epel-release gcc gcc-c++ make wget perl curl bzip2 readline readline-devel net-tools python python-devel crontabs ca-certificates)
+        for tool in ${yum_tools[@]}; do
+            error_detect_depends "yum -y install ${tool}"
+        done
         yum-config-manager --enable epel > /dev/null 2>&1
     fi
     log "Info" "Install development tools completed..."
@@ -966,6 +987,7 @@ install_lamp(){
     fi
     [ "${php}" != "do_not_install" ] && check_installed "install_php" "${php_location}"
     [ "${phpmyadmin}" != "do_not_install" ] && install_phpmyadmin
+    [ "${kodexplorer}" != "do_not_install" ] && install_kodexplorer
     [ "${php_modules_install}" != "do_not_install" ] && install_php_modules "${phpConfig}"
 
     finally
@@ -980,6 +1002,7 @@ preinstall_lamp(){
     php_preinstall_settings
     php_modules_preinstall_settings
     phpmyadmin_preinstall_settings
+    kodexplorer_preinstall_settings
 }
 
 #Pre-installation settings

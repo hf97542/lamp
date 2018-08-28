@@ -35,43 +35,47 @@ parallel_compile=1
 
 ##Software version
 #nghttp2
-nghttp2_filename="nghttp2-1.31.1"
+nghttp2_filename="nghttp2-1.32.0"
 #openssl
-openssl_filename="openssl-1.0.2o"
+openssl_filename="openssl-1.0.2p"
 #apache2.4
-apache2_4_filename="httpd-2.4.33"
+apache2_4_filename="httpd-2.4.34"
 #mysql5.5
-mysql5_5_filename="mysql-5.5.60"
+mysql5_5_filename="mysql-5.5.61"
 #mysql5.6
-mysql5_6_filename="mysql-5.6.40"
+mysql5_6_filename="mysql-5.6.41"
 #mysql5.7
-mysql5_7_filename="mysql-5.7.22"
+mysql5_7_filename="mysql-5.7.23"
 #mysql8.0
-mysql8_0_filename="mysql-8.0.11"
+mysql8_0_filename="mysql-8.0.12"
 #mariadb5.5
-mariadb5_5_filename="mariadb-5.5.60"
+mariadb5_5_filename="mariadb-5.5.61"
 #mariadb10.0
-mariadb10_0_filename="mariadb-10.0.35"
+mariadb10_0_filename="mariadb-10.0.36"
 #mariadb10.1
-mariadb10_1_filename="mariadb-10.1.32"
+mariadb10_1_filename="mariadb-10.1.35"
 #mariadb10.2
-mariadb10_2_filename="mariadb-10.2.14"
+mariadb10_2_filename="mariadb-10.2.17"
+#mariadb10.3
+mariadb10_3_filename="mariadb-10.3.9"
 #percona5.5
-percona5_5_filename="Percona-Server-5.5.59-38.11"
+percona5_5_filename="Percona-Server-5.5.61-38.13"
 #percona5.6
-percona5_6_filename="Percona-Server-5.6.39-83.1"
+percona5_6_filename="Percona-Server-5.6.41-84.1"
 #percona5.7
-percona5_7_filename="Percona-Server-5.7.21-21"
+percona5_7_filename="Percona-Server-5.7.22-22"
 #php5.6
-php5_6_filename="php-5.6.36"
+php5_6_filename="php-5.6.37"
 #php7.0
-php7_0_filename="php-7.0.30"
+php7_0_filename="php-7.0.31"
 #php7.1
-php7_1_filename="php-7.1.17"
+php7_1_filename="php-7.1.21"
 #php7.2
-php7_2_filename="php-7.2.5"
+php7_2_filename="php-7.2.9"
 #phpMyAdmin
-phpmyadmin_filename="phpMyAdmin-4.8.0.1-all-languages"
+phpmyadmin_filename="phpMyAdmin-4.8.3-all-languages"
+#kodexplorer
+kodexplorer_filename="kodexplorer"
 
 #apr
 apr_filename="apr-1.6.3"
@@ -100,18 +104,18 @@ imap_filename='imap-2007f'
 #libiconv
 libiconv_filename="libiconv-1.15"
 #swoole
-swoole_filename="swoole-src-2.1.3"
-set_hint ${swoole_filename} "php-swoole-2.1.3"
+swoole_filename="swoole-src-2.2.0"
+set_hint ${swoole_filename} "php-swoole-2.2.0"
 #xcache
 xcache_filename="xcache-3.2.0"
 #xdebug
 xdebug_filename="xdebug-2.6.0"
 #ImageMagick
-ImageMagick_filename="ImageMagick-7.0.7-28"
+ImageMagick_filename="ImageMagick-7.0.8-10"
 php_imagemagick_filename="imagick-3.4.3"
 set_hint ${php_imagemagick_filename} "php-${php_imagemagick_filename}"
 #GraphicsMagick
-GraphicsMagick_filename="GraphicsMagick-1.3.28"
+GraphicsMagick_filename="GraphicsMagick-1.3.30"
 php_graphicsmagick_filename="gmagick-1.1.7RC3"
 php_graphicsmagick_filename2="gmagick-2.0.5RC1"
 set_hint ${php_graphicsmagick_filename} "php-${php_graphicsmagick_filename}"
@@ -123,7 +127,7 @@ ionCube64_filename="ioncube_loaders_lin_x86-64"
 #libevent
 libevent_filename="libevent-2.0.22-stable"
 #memcached
-memcached_filename="memcached-1.5.7"
+memcached_filename="memcached-1.5.8"
 #libmemcached
 libmemcached_filename="libmemcached-1.0.18"
 #php-memcached
@@ -143,7 +147,7 @@ php_mongo_filename="mongodb-1.4.3"
 set_hint ${php_mongo_filename} "php-${php_mongo_filename}"
 #php-libsodium
 libsodium_filename="libsodium-1.0.16"
-php_libsodium_filename="libsodium-php-2.0.10"
+php_libsodium_filename="libsodium-php-2.0.11"
 
 
 #software array setting
@@ -168,6 +172,7 @@ ${mariadb5_5_filename}
 ${mariadb10_0_filename}
 ${mariadb10_1_filename}
 ${mariadb10_2_filename}
+${mariadb10_3_filename}
 ${percona5_5_filename}
 ${percona5_6_filename}
 ${percona5_7_filename}
@@ -184,6 +189,11 @@ do_not_install
 
 phpmyadmin_arr=(
 ${phpmyadmin_filename}
+do_not_install
+)
+
+kodexplorer_arr=(
+${kodexplorer_filename}
 do_not_install
 )
 
